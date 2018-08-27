@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean esOperacion(String txt){
-        for (final Button btn:lstOperaciones){/
+        for (final Button btn:lstOperaciones){
             if(btn.getText().equals(txt)){
                 return true;
             }
