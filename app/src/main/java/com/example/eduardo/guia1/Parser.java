@@ -1,21 +1,5 @@
 package com.example.eduardo.guia1;
 
-/**
- * Created by admin on 15/8/17.
- */
-
-/*
-*
-* Parser creado en la materia de Compiladores - USO
-* Fecha : Noviembre - 2016
-* Autor : Jonathan Giovanni Hernandez
-* Descripcion : el parser evalua una expresion matematica
-*               y muestra el resultado, ademas controla errores
-*               de entrada, y posee la capacidad para evaluar parentesis
-*               de manera recursiva, utiliza el analisis descendente recursivo
-* */
-
-
 public class Parser {
     public static String evaluar(final String entrada) {
         return new Object() {
@@ -50,10 +34,6 @@ public class Parser {
                 }
             }
 
-            // Gramatica:
-            // expresion = termino | expresion '+' termino | expresion '-' termino
-            // termino = factor | termino '*' factor | termino '/' factor
-            // factor = '(' expresion ')' | numero
 
             double parseExpresion() {
                 double x = parseTermino();
@@ -83,7 +63,7 @@ public class Parser {
                     while ((ch >= '0' && ch <= '9') || ch == '.') siguienteChar();
                     x = Double.parseDouble(entrada.substring(startPos, this.pos));
                 } else {
-                    //throw new RuntimeException("Error inesperado en :"+(char)ch  );
+                    
                 }
                 return x;
             }
