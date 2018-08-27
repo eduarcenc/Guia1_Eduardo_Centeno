@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         btnIgual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lblResultado.setText(Parser.evaluar(lblEntrada.getText().toString()));
+                //lblResultado.setText(Parser.evaluar(lblEntrada.getText().toString()));
             }
         });
         initNumeros();
