@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    //creacion de las variables
     private TextView lblEntrada;
     private TextView lblResultado;
     private ArrayList<Button> lstNumeros;
@@ -23,14 +22,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //inicializando controles
         lblEntrada      = (TextView) findViewById(R.id.lblEntrada);
         lblResultado    = (TextView) findViewById(R.id.lblResultado);
         btnAc           = (Button)   findViewById(R.id.btnAC);
         btnDel          = (Button)   findViewById(R.id.btnDEL);
         btnIgual        = (Button)   findViewById(R.id.btnIGUAL);
 
-        //numeros  - aqui se agregarian los restantes
         lstNumeros = new ArrayList<>();
         lstNumeros.add( (Button) findViewById(R.id.btn9));
         lstNumeros.add( (Button) findViewById(R.id.btn8));
@@ -44,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         lstNumeros.add( (Button) findViewById(R.id.btn0));
         lstNumeros.add( (Button) findViewById(R.id.btnP));
 
-        //operaciones matematicas  - aqui se agregarian las restantes
+     
         lstOperaciones = new ArrayList<>();
         lstOperaciones.add( (Button) findViewById(R.id.btnSUM) );
         lstOperaciones.add( (Button) findViewById(R.id.btnRES) );
@@ -55,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         btnAc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //limpia las cajas y setea la opPulsada en true para evitar poner la op matematica al inicio
                 lblEntrada.setText("");
                 lblResultado.setText("");
                 opPulsada=true;
@@ -70,22 +66,20 @@ public class MainActivity extends AppCompatActivity {
         btnIgual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //evalua la expresion dada en la entrada y lo muestra en txtResultado
                 lblResultado.setText(Parser.evaluar(lblEntrada.getText().toString()));
             }
         });
-        //llamo las funciones que inicializan los botones de numeros y op mat
         initNumeros();
         initOperaciones();
     }
 
     private void initNumeros(){
-        //recorre todos los botones en la lista y les agrega eventos onClick
+
         for (final Button btn:lstNumeros){
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //cada vez que pulse un numero lo concatena al texto
+                  
                     lblEntrada.setText(lblEntrada.getText().toString() + btn.getText().toString());
                     opPulsada=false;
                 }
@@ -93,40 +87,40 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private void initOperaciones(){
-        //recorre todos los botones en la lista y les agrega eventos onClick
+     
         for (final Button btn:lstOperaciones){
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!opPulsada){// si no hay operacion matematica pulsada con anterioridad
-                        //agrega la operacion al texto
+                    if(!opPulsada){
+                        
                         lblEntrada.setText(lblEntrada.getText().toString() + btn.getText().toString());
-                        opPulsada=true;// y entonces la operacion matematica ya esta pulsada
+                        opPulsada=true;
                     }
                 }
             });
         }
     }
     private void eliminarUltimo(){
-        //elimina el ultimo caracter en el TextView
-        String str = lblEntrada.getText().toString();//obtento el texto del TextView
-        if (str != null && str.length() > 0 ) {// verifico que no sea nulo y que tenga mas de 1 caracter
-            str = str.substring(0, str.length() - 1); // saco una subcadena del texto total - 1 (esto elimina el ultimo)
-            if(str.length()>0)//si la longitud ya cortada es mayor a cero
-                opPulsada = esOperacion((str.substring(str.length()-1,str.length())));//evaluo si es operacion
-            else//si es menor a cero, es decir esta vacio
-                opPulsada = true;//guardo como pulsado para evitar poner op matematicas al inicio
+        
+        String str = lblEntrada.getText().toString();
+        if (str != null && str.length() > 0 ) {/
+            str = str.substring(0, str.length() - 1); 
+            if(str.length()>0)
+                opPulsada = esOperacion((str.substring(str.length()-1,str.length())));
+            else
+                opPulsada = true;
         }
         lblEntrada.setText(str);
     }
 
-    private boolean esOperacion(String txt){//evalua si es operacion matematica
-        for (final Button btn:lstOperaciones){//revizo en la lista de botones
-            if(btn.getText().equals(txt)){//comparo si el texto que envio es igual al texto de los botones '+' == '+' -> true
+    private boolean esOperacion(String txt){
+        for (final Button btn:lstOperaciones){/
+            if(btn.getText().equals(txt)){
                 return true;
             }
         }
-        return false;//si no hay ningun texto que coincida entonces no es op matematica
+        return false;
     }
 
 }
