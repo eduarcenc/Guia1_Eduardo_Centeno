@@ -1,4 +1,4 @@
-package com.example.osorio.guia1;
+package com.example.eduardo.guia1;
 
 /**
  * Created by admin on 15/8/17.
