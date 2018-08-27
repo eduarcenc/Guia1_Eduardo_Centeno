@@ -1,4 +1,4 @@
-package com.example.osorio.guia1;
+package com.example.eduardo.guia1;
 
 import org.junit.Test;
 
